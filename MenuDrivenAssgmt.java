@@ -665,8 +665,8 @@ public class MenuDrivenAssgmt {
                 else{
                     this.tableDsnotExMsg();
                     this.input = table_name;
-                    //this.generic_insertion();
-                    System.exit(1);
+                    this.generic_insertion();
+                    //System.exit(1);
                 }
 
             }
@@ -692,7 +692,7 @@ public class MenuDrivenAssgmt {
         this.menuPage();
     }
 
-    public void listLibraryUser(String view_sql){
+    public void listLibraryUser(){
         try{
             this.generic_arrlist.clear();
             String people_sql = "SELECT * FROM people";
@@ -723,7 +723,7 @@ public class MenuDrivenAssgmt {
                     "             ON  people."+ peopleSSN +" = checkedOutBooks."+checkedOutSNN;
 
             this.rs = this.statement.executeQuery(inner_books_checkedOut);
-            System.out.println(this.rs.next());
+            //System.out.println(this.rs.next());
             //this.rsmd = this.rs.getMetaData();
             //System.out.println(this.rsmd.getColumnName(1));
             System.out.println("---------------------------------------------------------------------");
@@ -750,6 +750,9 @@ public class MenuDrivenAssgmt {
                 System.out.println(this.rs.getString("name"));
             }
             this.generic_arrlist.clear();
+
+            this.redirectToHome();
+
 
         }
         catch (SQLException e){
@@ -822,11 +825,7 @@ public class MenuDrivenAssgmt {
                 this.generic_insertion();
             }
             else if (mapOp.get(op_symbol) == LIST_LIBRARY){
-                String view_sql = "SELECT people.name, books.author, books.title FROM people JOIN checkedOutBooks " +
-                                //" WHERE people.SNN = checkedOutBooks.SNN AND books.callNo = checkedOutBooks.callNo";
-                        " ON PEOPLE.SNN = checkedOutBooks.SNN";
-                //"CREATE VIEW \"SCHEMA\".LIBRARY_USERS AS " +
-                this.listLibraryUser(view_sql);
+                this.listLibraryUser();
 
 
 
